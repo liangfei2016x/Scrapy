@@ -12,7 +12,7 @@ class DmozSpider(scrapy.Spider):
     def parse(self, response):
         for sel in response.xpath('//*[@class="goods-list clearfix"]/div/div'):
             item = DataokeItem()
-            item["img_url"] = sel.xpath("div[1]/a/img/@src").extract_first()
+            item["img_url"] = sel.xpath("div[1]/a/img/@data-original").extract_first()
             item["describe"] = re.sub("[\n\t]", "", sel.xpath("div[2]/span/a/text()").extract_first())
             item["price"] = sel.xpath("div[2]/div[2]/div[1]/p/b/text()").extract_first()
             item["marketing_plan"] = sel.xpath("div[2]/div[2]/div[2]/p/text()").extract_first()
